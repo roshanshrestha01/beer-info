@@ -9,17 +9,17 @@ type IMainProps = {
 
 const Main = (props: IMainProps) => {
   return (
-    <div className="w-full px-1 text-gray-700 antialiased">
+    <div className="mt-3 w-full px-1 text-gray-700">
       {props.meta}
-      <div className="mx-auto max-w-screen-md">
-        <div className="border-b border-gray-300">
+      <div className="mx-auto max-w-screen-xl">
+        <div>
           <div>
             <ul className="flex flex-wrap text-xl">
               <li className="mr-6">
                 <ActiveLink
-                  activeClassName="active"
+                  activeClassName="nav-active"
                   href="/"
-                  className="border-none text-gray-700 hover:text-gray-900"
+                  className="border-none text-gray-500"
                   data-testid="all-beers-nav-link"
                 >
                   All Beers
@@ -27,9 +27,9 @@ const Main = (props: IMainProps) => {
               </li>
               <li className="mr-6">
                 <ActiveLink
-                  activeClassName="active"
+                  activeClassName="nav-active"
                   href="/about/"
-                  className="border-none text-gray-700 hover:text-gray-900"
+                  className="border-none text-gray-500"
                   data-testid="my-beers-nav-link"
                 >
                   My Beers
@@ -38,7 +38,6 @@ const Main = (props: IMainProps) => {
             </ul>
           </div>
         </div>
-
         <div className="content py-5 text-xl">{props.children}</div>
       </div>
     </div>

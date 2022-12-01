@@ -19,3 +19,7 @@ a:hover {
 .content ul {
   @apply my-6;
 }
+
+.nav-active {
+  @apply text-gray-900 font-semibold
+}
