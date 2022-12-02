@@ -23,6 +23,11 @@ const Meta = (props: IMetaProps) => {
           key="viewport"
         />
         <link
+          rel="apple-touch-icon"
+          href={`${router.basePath}/apple-touch-icon.png`}
+          key="apple"
+        />
+        <link
           rel="icon"
           type="image/png"
           sizes="32x32"
