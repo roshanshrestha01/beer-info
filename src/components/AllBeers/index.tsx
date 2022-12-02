@@ -3,7 +3,7 @@ import LoadMore from '@/components/LoadMore';
 
 const AllBeers = () => {
   return (
-    <div>
+    <>
       <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2">
         <BeerInfo
           imageURL="https://images.punkapi.com/v2/2.png"
@@ -24,7 +24,7 @@ const AllBeers = () => {
       <div className="my-4 text-center">
         <LoadMore handleClick={() => console.log('more')} />
       </div>
-    </div>
+    </>
   );
 };
 

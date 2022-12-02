@@ -9,9 +9,9 @@ type IMainProps = {
 
 const Main = (props: IMainProps) => {
   return (
-    <div className="mt-3 w-full px-1 text-gray-700">
+    <div className="mt-3 w-full px-3 text-gray-700 sm:px-3 md:px-2 lg:px-1">
       {props.meta}
-      <div className="mx-auto max-w-screen-xl">
+      <div className="mx-auto sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-xl">
         <div>
           <div>
             <ul className="flex flex-wrap text-xl">
