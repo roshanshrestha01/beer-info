@@ -15,3 +15,27 @@ a {
 .nav-active {
   @apply text-gray-900 font-semibold
 }
+
+.card__wrapper {
+  @apply flex h-[100%] flex-col items-center cursor-pointer rounded-lg border bg-white shadow-md hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 md:w-[100%] md:flex-row
+}
+
+.card__image {
+  @apply m-[40px] h-[200px] w-[50px] rounded-t-lg object-cover md:h-[150px] md:rounded-none md:rounded-l-lg lg:h-[150px]
+}
+.card__content {
+  @apply flex flex-col justify-between p-4 leading-normal
+}
+
+
+.card__name {
+  @apply mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white
+}
+
+.card__tagline {
+  @apply mb-3 font-normal text-yellow-600 dark:text-yellow-400
+}
+
+.card__description {
+  @apply text-sm text-gray-700 dark:text-gray-400
+}

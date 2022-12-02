@@ -1,5 +1,5 @@
 type EmptyCustomBeersProps = {
-  handleClickHere: () => void;
+  handleClickHere: (e: any) => void;
 };
 
 const EmptyCustomBeers = ({ handleClickHere }: EmptyCustomBeersProps) => {
