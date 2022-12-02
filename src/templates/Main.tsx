@@ -28,7 +28,7 @@ const Main = (props: IMainProps) => {
               <li className="mr-6">
                 <ActiveLink
                   activeClassName="nav-active"
-                  href="/about/"
+                  href="/my-beers/"
                   className="border-none text-gray-500"
                   data-testid="my-beers-nav-link"
                 >
