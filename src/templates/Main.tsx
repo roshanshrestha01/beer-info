@@ -5,6 +5,7 @@ import ActiveLink from '@/components/ActiveLink';
 type IMainProps = {
   meta: ReactNode;
   children: ReactNode;
+  actionButton?: ReactNode;
 };
 
 const Main = (props: IMainProps) => {
@@ -13,7 +14,7 @@ const Main = (props: IMainProps) => {
       {props.meta}
       <div className="mx-auto sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-xl">
         <div>
-          <div>
+          <div className="flex justify-between">
             <ul className="flex flex-wrap text-xl">
               <li className="mr-6">
                 <ActiveLink
@@ -36,6 +37,7 @@ const Main = (props: IMainProps) => {
                 </ActiveLink>
               </li>
             </ul>
+            <div>{props.actionButton}</div>
           </div>
         </div>
         <div className="content py-5 text-xl">{props.children}</div>

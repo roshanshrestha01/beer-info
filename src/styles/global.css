@@ -39,3 +39,23 @@ a {
 .card__description {
   @apply text-sm text-gray-700 dark:text-gray-400
 }
+
+.btn {
+  @apply font-normal text-sm py-2 px-4 rounded;
+}
+
+.btn-primary {
+  @apply bg-blue-500 text-white;
+}
+
+.btn-primary:hover {
+  @apply bg-blue-700;
+}
+
+.btn-link {
+  @apply text-blue-500 py-0 px-0;
+}
+
+.btn-secondary {
+  @apply text-gray-300;
+}

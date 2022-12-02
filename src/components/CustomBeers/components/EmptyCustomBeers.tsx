@@ -8,9 +8,9 @@ const EmptyCustomBeers = ({ handleClickHere }: EmptyCustomBeersProps) => {
       <div className="text-center text-sm text-[#7f7f7f]">
         <p>Nothing to see yet</p>
         <p>
-          <a href="" onClick={handleClickHere}>
+          <button className="btn btn-link" onClick={handleClickHere}>
             Click here
-          </a>{' '}
+          </button>{' '}
           to add your first beer!
         </p>
       </div>

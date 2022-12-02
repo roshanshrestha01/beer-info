@@ -1,7 +1,7 @@
 import type { BeerInfoProps } from '@/components/BeerInfo';
 import BeerInfo from '@/components/BeerInfo';
 
-type AllCustomBeersProps = {
+export type AllCustomBeersProps = {
   beers: BeerInfoProps[];
 };
 
