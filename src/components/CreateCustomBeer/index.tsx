@@ -1,8 +1,10 @@
 import { useRouter } from 'next/router';
 import type { ReactNode } from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import type { BeerInfoProps } from '@/components/BeerInfo';
+import useFormData from '@/hooks/formData';
+import makeId from '@/utils/makeId';
 
 type CreateCustomBeerProps = {
   showModal: boolean;
@@ -44,38 +46,11 @@ const CreateCustomBeer = ({
   callSuccess,
 }: CreateCustomBeerProps) => {
   const router = useRouter();
-  const [formData, setFormData] = useState({
+  const [formData, handleChange, resetState] = useFormData({
     name: '',
     tagline: '',
     description: '',
   });
-
-  const handleChange = (event: any) => {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
-    });
-  };
-
-  const resetState = () => {
-    setFormData({
-      name: '',
-      tagline: '',
-      description: '',
-    });
-  };
-
-  const makeId = (length: number) => {
-    let result = '';
-    const characters =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const charactersLength = characters.length;
-    // eslint-disable-next-line no-plusplus
-    for (let i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-  };
 
   const resetAndToggle = () => {
     toggleModal(false);
@@ -83,6 +58,7 @@ const CreateCustomBeer = ({
   };
 
   useEffect(() => {
+    // Close modal when escape key is pressed
     const close = (e: any) => {
       if (e.keyCode === 27) {
         toggleModal(false);
