@@ -3,6 +3,8 @@ import type { ReactNode } from 'react';
 
 import { Meta } from './Meta';
 
+jest.mock('next/router', () => require('next-router-mock'));
+
 // Mock `next/head`: https://bradgarropy.com/blog/mocking-nextjs
 jest.mock(
   'next/head',

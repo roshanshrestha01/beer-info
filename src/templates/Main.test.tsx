@@ -2,6 +2,8 @@ import { render, screen } from '@testing-library/react';
 
 import { Main } from './Main';
 
+jest.mock('next/router', () => require('next-router-mock'));
+
 describe('Main template', () => {
   describe('Render method', () => {
     it('should have 2 menu items', () => {
