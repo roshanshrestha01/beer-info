@@ -18,7 +18,7 @@ describe("store:HomePage for second page", () => {
     await punkAPI.getBeers(2);
   })
 
-  it("should have 1 beer data in beers", async () => {
+  it("should have 10 beer data in beers", async () => {
     expect(punkAPI.beers.length).toEqual(10);
   });
 
