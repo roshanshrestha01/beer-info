@@ -12,6 +12,12 @@ const AllBeers = () => {
     await punkAPI.getBeers(nextPage).catch(console.error);
   };
 
+  const getIngredientsSting = (
+    ingredients: string | object | undefined
+  ): string => {
+    return Object.keys(ingredients || {}).toString();
+  };
+
   const incrementPage = () => {
     setNextPage(nextPage + 1);
   };
@@ -29,6 +35,7 @@ const AllBeers = () => {
         name,
         tagline,
         description,
+        ingredients,
         // @ts-ignore
         image_url: imageURL,
       } = beer;
@@ -40,6 +47,7 @@ const AllBeers = () => {
           name={name}
           tagline={tagline}
           description={description}
+          ingredients={getIngredientsSting(ingredients)}
         />
       );
     });

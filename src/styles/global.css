@@ -21,10 +21,10 @@ a {
 }
 
 .card__image {
-  @apply m-[40px] h-[200px] w-[50px] rounded-t-lg object-cover md:h-[150px] md:rounded-none md:rounded-l-lg lg:h-[150px]
+  @apply m-[40px] h-[200px] md:w-[40px] sm:w-[50px] rounded-t-lg object-cover md:h-[150px] md:rounded-none md:rounded-l-lg lg:h-[150px]
 }
 .card__content {
-  @apply flex flex-col justify-between p-4 leading-normal
+  @apply flex flex-col justify-between p-4 leading-normal ml-[20px]
 }
 
 
