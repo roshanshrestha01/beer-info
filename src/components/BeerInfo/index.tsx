@@ -38,7 +38,7 @@ type CardImageProps = {
 
 export const CardImage = ({ imageURL, name, ingredients }: CardImageProps) => {
   return (
-    <div className="group relative">
+    <div className="group relative min-w-[150px] text-center">
       <img className="card__image" src={imageURL} alt={name} />
       <div className="absolute top-0 left-0 mb-6 hidden flex-col items-center group-hover:flex">
         {/* @ts-ignore */}
