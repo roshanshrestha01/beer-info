@@ -17,7 +17,7 @@ a {
 }
 
 .card__wrapper {
-  @apply flex h-[100%] flex-col items-center cursor-pointer rounded-lg border bg-white shadow-md hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 md:w-[100%] md:flex-row
+  @apply flex h-[100%] py-3 flex-col items-center cursor-pointer rounded-lg border bg-white shadow-md hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 md:w-[100%] md:flex-row
 }
 
 .card__image {
