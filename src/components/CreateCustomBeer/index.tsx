@@ -1,12 +1,42 @@
 import { useRouter } from 'next/router';
+import type { ReactNode } from 'react';
+import { useEffect, useState } from 'react';
 
 import type { BeerInfoProps } from '@/components/BeerInfo';
 
 type CreateCustomBeerProps = {
   showModal: boolean;
-  toggleModal: () => void;
+  toggleModal: (b: boolean) => void;
   callSuccess: (data: BeerInfoProps) => void;
 };
+
+type IChildren = {
+  children: ReactNode;
+};
+
+const Modal = ({ children }: IChildren) => (
+  <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden outline-none focus:outline-none">
+    <div className="relative my-6 mx-auto w-auto max-w-3xl">
+      <div className="relative flex w-full flex-col rounded-lg border-0 bg-white shadow-lg outline-none focus:outline-none sm:w-[500px] md:w-[600px]">
+        {children}
+      </div>
+    </div>
+  </div>
+);
+
+const ModalHead = ({ children }: IChildren) => (
+  <div className="flex items-start justify-between rounded-t p-5">
+    {children}
+  </div>
+);
+
+const ModalContent = ({ children }: IChildren) => (
+  <div className="relative flex-auto px-6">{children}</div>
+);
+
+const ModalFooter = ({ children }: IChildren) => (
+  <div className="flex items-center justify-end rounded-b p-6">{children}</div>
+);
 
 const CreateCustomBeer = ({
   showModal,
@@ -14,89 +44,129 @@ const CreateCustomBeer = ({
   callSuccess,
 }: CreateCustomBeerProps) => {
   const router = useRouter();
+  const [formData, setFormData] = useState({
+    name: '',
+    tagline: '',
+    description: '',
+  });
 
-  const submit = () => {
-    callSuccess({
-      imageURL: `${router.basePath}/img/default-beer.png`,
-      name: 'Hanoi Beer',
-      tagline: 'IPA Vietnamese',
-      description: 'hello world!',
+  const handleChange = (event: any) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
     });
-    toggleModal();
   };
 
-  // @ts-ignore
+  const resetState = () => {
+    setFormData({
+      name: '',
+      tagline: '',
+      description: '',
+    });
+  };
+
+  const makeId = (length: number) => {
+    let result = '';
+    const characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  };
+
+  const resetAndToggle = () => {
+    toggleModal(false);
+    resetState();
+  };
+
+  useEffect(() => {
+    const close = (e: any) => {
+      if (e.keyCode === 27) {
+        toggleModal(false);
+      }
+    };
+    window.addEventListener('keydown', close);
+    return () => window.removeEventListener('keydown', close);
+  }, []);
+
+  const submit = () => {
+    const data = {
+      ...formData,
+      id: makeId(7),
+      imageURL: `${router.basePath}/img/default-beer.png`,
+    };
+    callSuccess(data);
+    resetAndToggle();
+  };
+
   return (
     <>
       {showModal ? (
         <>
-          <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden outline-none focus:outline-none">
-            <div className="relative my-6 mx-auto w-auto max-w-3xl">
-              <div className="relative flex w-full flex-col rounded-lg border-0 bg-white shadow-lg outline-none focus:outline-none sm:w-[500px] md:w-[600px]">
-                <div className="flex items-start justify-between rounded-t p-5">
-                  <h3 className="text-3xl font-semibold">Add a New Beer</h3>
-                  <button
-                    className="float-right ml-auto border-0 bg-transparent p-1 text-3xl font-semibold leading-none text-black opacity-5 outline-none focus:outline-none"
-                    onClick={toggleModal}
-                  >
-                    <span className="block h-6 w-6 bg-transparent text-2xl text-black opacity-5 outline-none focus:outline-none">
-                      ×
-                    </span>
-                  </button>
+          <Modal>
+            <ModalHead>
+              <h3 className="text-3xl font-semibold">Add a New Beer</h3>
+            </ModalHead>
+            <form onSubmit={submit}>
+              <ModalContent>
+                <div className="mb-6 w-[150px] border-2 text-center">
+                  <img
+                    className="inline h-[150px] w-[70px]"
+                    src={`${router.basePath}/img/default-beer.png`}
+                    alt="default-beer-image"
+                  />
                 </div>
-                <form onSubmit={submit}>
-                  <div className="relative flex-auto px-6">
-                    <div className="mb-6 w-[150px] text-center">
-                      <img
-                        className="inline h-[150px] w-[70px]"
-                        src={`${router.basePath}/img/default-beer.png`}
-                        alt="default-beer-image"
-                      />
-                    </div>
-                    <div>
-                      <input
-                        type="text"
-                        name="name"
-                        className="my-3 block w-full rounded-lg border border-gray-600 bg-white p-2.5 text-sm text-gray-700 placeholder:text-gray-700 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder:text-gray-400"
-                        placeholder="Beer name*"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <input
-                        type="text"
-                        name="genre"
-                        className="my-3 block w-full rounded-lg border border-gray-600 bg-white p-2.5 text-sm text-gray-700 placeholder:text-gray-700 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder:text-gray-400"
-                        placeholder="Genre*"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <textarea
-                        name="description*"
-                        className="my-3 block w-full rounded-lg border border-gray-600 bg-white p-2.5 text-sm text-gray-700 placeholder:text-gray-700 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder:text-gray-400"
-                        rows={4}
-                        placeholder="Description*"
-                        required
-                      />
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-end rounded-b p-6">
-                    <button
-                      className="btn mr-3 font-bold text-gray-600"
-                      type="button"
-                      onClick={toggleModal}
-                    >
-                      Cancel
-                    </button>
-                    <button type="submit" className="btn btn-primary">
-                      Save
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
+                <div>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="my-3 block w-full rounded-lg border border-gray-600 bg-white p-2.5 text-sm text-gray-700 placeholder:text-gray-700 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder:text-gray-400"
+                    placeholder="Beer name*"
+                    required
+                  />
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    name="tagline"
+                    value={formData.tagline}
+                    onChange={handleChange}
+                    className="my-3 block w-full rounded-lg border border-gray-600 bg-white p-2.5 text-sm text-gray-700 placeholder:text-gray-700 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder:text-gray-400"
+                    placeholder="Genre*"
+                    required
+                  />
+                </div>
+                <div>
+                  <textarea
+                    name="description"
+                    className="my-3 block w-full rounded-lg border border-gray-600 bg-white p-2.5 text-sm text-gray-700 placeholder:text-gray-700 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder:text-gray-400"
+                    rows={4}
+                    value={formData.description}
+                    onChange={handleChange}
+                    placeholder="Description*"
+                    required
+                  />
+                </div>
+              </ModalContent>
+              <ModalFooter>
+                <button
+                  className="btn mr-3 font-bold text-gray-600"
+                  type="button"
+                  onClick={resetAndToggle}
+                >
+                  Cancel
+                </button>
+                <button type="submit" className="btn btn-primary">
+                  Save
+                </button>
+              </ModalFooter>
+            </form>
+          </Modal>
           <div className="fixed inset-0 z-40 bg-black opacity-25"></div>
         </>
       ) : null}

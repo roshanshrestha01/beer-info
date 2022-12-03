@@ -12,10 +12,6 @@ const MyBeers = () => {
 
   const [showModal, setShowModal] = useState(false);
 
-  const toggleModal = () => {
-    setShowModal(!showModal);
-  };
-
   const addCustomBeers = (data: BeerInfoProps) => {
     setBeers([...beers, data]);
   };
@@ -24,16 +20,19 @@ const MyBeers = () => {
     <Main
       meta={<Meta title="My beers" description="Custom beers from users." />}
       actionButton={
-        <button className="btn btn-primary" onClick={toggleModal}>
+        <button className="btn btn-primary" onClick={() => setShowModal(true)}>
           Add a new beer
         </button>
       }
     >
-      <CheckCustomBearExist beers={beers} toggleModal={toggleModal} />
+      <CheckCustomBearExist
+        beers={beers}
+        toggleModal={() => setShowModal(true)}
+      />
 
       <CreateCustomBeer
         showModal={showModal}
-        toggleModal={toggleModal}
+        toggleModal={setShowModal}
         callSuccess={addCustomBeers}
       />
     </Main>
