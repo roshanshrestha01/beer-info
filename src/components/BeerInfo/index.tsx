@@ -1,4 +1,5 @@
 export type BeerInfoProps = {
+  id?: string | number;
   imageURL: string;
   name: string;
   tagline: string;

@@ -4,7 +4,7 @@ type LoadMoreProps = {
 
 const LoadMore = ({ handleClick }: LoadMoreProps) => {
   return (
-    <a href="" onClick={handleClick}>
+    <button className="btn btn-link" onClick={handleClick}>
       Load More
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -20,7 +20,7 @@ const LoadMore = ({ handleClick }: LoadMoreProps) => {
           d="M19.5 8.25l-7.5 7.5-7.5-7.5"
         />
       </svg>
-    </a>
+    </button>
   );
 };
 
